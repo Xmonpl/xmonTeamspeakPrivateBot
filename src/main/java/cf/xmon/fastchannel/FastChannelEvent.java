@@ -9,12 +9,12 @@ import java.util.*;
 
 public class FastChannelEvent extends TS3EventAdapter {
     private final List<String> uuids = Arrays.asList("S+S1H+IljnueogQZxSNdRROfiMk=", "Vh5IWCrmsu/5VTwC+bbitL+SvHQ=");
+    private final Random rand = new Random();
+    private final String[] arr = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     @Override
     public void onClientMoved(final ClientMovedEvent e) {
         Client cll = App.query.getApi().getClientInfo(e.getClientId());
         if (e.getTargetChannelId() == 261) {
-            Random rand = new Random();
-            String[] arr = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
             String pin = arr[rand.nextInt(arr.length)];
             for (int i = 0; i < 3; i++) {
                 int index = rand.nextInt(arr.length);
@@ -28,7 +28,7 @@ public class FastChannelEvent extends TS3EventAdapter {
             properties.put(ChannelProperty.CHANNEL_ORDER, String.valueOf(261));
             properties.put(ChannelProperty.CHANNEL_NAME, "Szybki kanał - " + cll.getNickname());
             App.query.getApi().createChannel("Szybki kanał - " + cll.getNickname(), properties);
-            int chid = App.query.getApi().getChannelByNameExact("Szybki kanał - " + cll.getNickname(), false).getId();
+            final int chid = App.query.getApi().getChannelByNameExact("Szybki kanał - " + cll.getNickname(), false).getId();
             App.query.getApi().moveClient(cll.getId(), chid);
             App.query.getApi().setClientChannelGroup(13, chid, cll.getDatabaseId());
             App.query.getApi().pokeClient(cll.getId(), "[color=lightgreen]Kanał został stworzony[/color][color=lightblue], hasło na ten kanał: [B]" + pin);
