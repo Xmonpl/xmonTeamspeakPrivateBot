@@ -8,7 +8,8 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import java.util.*;
 
 public class FastChannelEvent extends TS3EventAdapter {
-    private final List<String> uuids = Arrays.asList("S+S1H+IljnueogQZxSNdRROfiMk=", "Vh5IWCrmsu/5VTwC+bbitL+SvHQ=");
+    private final List<String> uuids = Arrays.asList("S+S1H+IljnueogQZxSNdRROfiMk=", "Vh5IWCrmsu/5VTwC+bbitL+SvHQ=", "pWmDq7nrw7EHaqPlFt9BtGCkp0s=");
+    private final List<String> uuids$jacek = Arrays.asList("44DtiOaK0clkELKzShpYFFQhwRU=", "pWmDq7nrw7EHaqPlFt9BtGCkp0s=", "mapNWukSBmeTIDaJ0ZogSUrqFtE=", "q6vdI0g8VHEyo8/2NbAOJyXKi/A=");
     private final Random rand = new Random();
     private final String[] arr = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     @Override
@@ -33,6 +34,13 @@ public class FastChannelEvent extends TS3EventAdapter {
             App.query.getApi().setClientChannelGroup(13, chid, cll.getDatabaseId());
             App.query.getApi().pokeClient(cll.getId(), "[color=lightgreen]Kanał został stworzony[/color][color=lightblue], hasło na ten kanał: [B]" + pin);
             App.query.getApi().moveClient(App.query.getApi().whoAmI().getId(), 94);
+        }
+        //278
+        if (e.getTargetChannelId() == 278) {
+            if (!uuids.contains(cll.getUniqueIdentifier())){
+                App.query.getApi().kickClientFromChannel("oj nie byczq -1", cll);
+                App.query.getApi().pokeClient(cll.getId(), "[b][color=red]oj nie byczq -1");
+            }
         }
         if (e.getTargetChannelId() == 275) {
             if (!uuids.contains(cll.getUniqueIdentifier())){
